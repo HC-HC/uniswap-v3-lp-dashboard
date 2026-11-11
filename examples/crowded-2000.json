@@ -1,0 +1,1 @@
+{ "snapshotId": "snap_2db514b79e879b0d", "label": "Example · $50k in the crowded $2,000–2,030 band · static", "inputs": { "capitalUsd": 50000, "rangeLower": 2000, "rangeUpper": 2030, "liquidityMode": "static" } }

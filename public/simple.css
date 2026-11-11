@@ -1,0 +1,36 @@
+.main.simple { grid-template-columns: 236px minmax(0, 1fr) 330px; }
+@media (max-width: 1100px) { .main.simple { grid-template-columns: 1fr; } }
+.hint { color: var(--muted); font-size: 10.5px; margin: 2px 0 0; }
+ul.howto { margin: 0; padding-left: 15px; color: var(--text-2); font-size: 11.5px; line-height: 1.45; }
+ul.howto li { margin-bottom: 5px; }
+ul.howto.small { font-size: 10.5px; }
+ul.howto b { color: var(--text); }
+.answer .q { padding: 8px 0 9px; border-bottom: 1px solid var(--rule); }
+.answer .q:last-child { border-bottom: 0; }
+.answer .ql { color: var(--muted); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+.answer .qv { font: 700 24px var(--mono); letter-spacing: -.02em; margin: 2px 0 1px; }
+.answer .qs { color: var(--text-2); font-size: 11.5px; line-height: 1.4; }
+.answer .bottom .qv { font-size: 28px; }
+.cmp td, .cmp th { font-size: 12px; padding: 4px 8px; }
+.cmp th { font-size: 10px; }
+.nw { white-space: nowrap; }
+@media (max-width: 1400px) {
+  .main.simple { grid-template-columns: 210px minmax(0, 1fr) 296px; }
+  .cmp td, .cmp th { font-size: 11px; padding: 4px 5px; }
+  .answer .qv { font-size: 21px; } .answer .bottom .qv { font-size: 24px; }
+}
+.foot { color: var(--muted); font-size: 10px; display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+.answer .qs { font-family: var(--mono); font-size: 11px; }
+#scn td, #scn th { font-size: 11px; padding: 2px 5px; }
+.answer .q { padding: 6px 0 7px; }
+.answer .qv { font-size: 21px; } .answer .bottom .qv { font-size: 24px; }
+.ql .prov, .k .prov, h3 .prov, .cap .prov, .legend .prov { width: 6px; height: 6px; display: inline-block; vertical-align: middle; margin-left: 2px; }
+.foot { gap: 10px; } .foot span { display: inline-flex; gap: 4px; align-items: center; }
+.strip .right button { padding: 3px 8px; }
+.mini-seg { width: auto; display: inline-flex; vertical-align: middle; }
+.mini-seg button { padding: 2px 9px; font-size: 10px; letter-spacing: .04em; text-transform: uppercase; }
+.tierwarn { padding: 4px 10px 6px; font-size: 10.5px; color: var(--warn); }
+.tierwarn div { margin-bottom: 2px; }
+#tierTable td, #tierTable th { font-size: 11.5px; padding: 4px 7px; }
+.mini-seg button { white-space: nowrap; }
+@media (max-width: 1400px) { #tierTable td, #tierTable th { font-size: 10.5px; padding: 3px 4px; } }

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "label": "WETH/USDC 0.05% (Ethereum mainnet) — 2026-11-08 evening UTC",
+  "capturedAt": "2026-11-08T22:50:00Z",
+  "capture": {
+    "method": "Public pages fetched on 2026-11-08 (UTC) and transcribed field by field. Values are copied as published; nothing here is modelled.",
+    "operator": "lp-range-lab snapshot script (manual capture)",
+    "notes": [
+      "Sources disagree on 24h volume by ~6x (different windows and methods for counting volume). The snapshot keeps every value; the analysis picks one according to volumePolicy and says which.",
+      "Daily price history is market-wide ETH/USD (CoinCheckup), standing in for the pool's WETH/USDC price. Pool prices stay within a few basis points of that market price because of arbitrage.",
+      "Active liquidity is not published by these sources. The engine estimates it from the Bitquery depth table (May 2026), so treat it as an estimate and override it with on-chain liquidity() when you can."
+    ]
+  },
+  "pool": {
+    "chain": "ethereum",
+    "chainId": 1,
+    "protocol": "uniswap-v3",
+    "address": "0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640",
+    "feeTier": 0.0005,
+    "tickSpacing": 10,
+    "token0": { "symbol": "USDC", "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", "decimals": 6 },
+    "token1": { "symbol": "WETH", "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", "decimals": 18 },
+    "base": "token1",
+    "priceUnit": "USDC per WETH"
+  },
+  "sources": {
+    "etherscan": { "name": "Etherscan (pool contract page)", "url": "https://etherscan.io/address/0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640", "kind": "on-chain explorer" },
+    "dextools": { "name": "DexTools pair explorer", "url": "https://dextools.io/app/ether/pair-explorer/0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640", "kind": "DEX aggregator" },
+    "dexpaprika": { "name": "DexPaprika pool page", "url": "https://dexpaprika.com/ethereum/pool/0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640", "kind": "DEX aggregator" },
+    "tradingstrategy": { "name": "TradingStrategy.ai pair page", "url": "https://tradingstrategy.ai/trading-view/ethereum/uniswap-v3/eth-usdc-fee-5", "kind": "DEX aggregator" },
+    "bitquery": { "name": "Bitquery DEXrabbit pool page (slippage table)", "url": "https://dexrabbit.bitquery.io/eth/pool/0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640", "kind": "on-chain indexer" },
+    "defillama": { "name": "DefiLlama Yields (pool 665dc8bc…)", "url": "https://defillama.com/yields/pool/665dc8bc-c79d-4800-97f7-304bf368e547", "kind": "yield aggregator" },
+    "coincheckup": { "name": "CoinCheckup ETH historical data", "url": "https://coincheckup.com/en/coins/ethereum/historical-data", "kind": "market data (CEX/DEX aggregate)" }
+  },
+  "observations": {
+    "spotPrice": [
+      { "value": 2122.26, "observedAt": "2026-11-08T22:46:24Z", "source": "etherscan", "note": "Etherscan's WETH token price shown next to the pool's holdings" },
+      { "value": 2123.39, "observedAt": "2026-11-08T22:44:47Z", "source": "dextools", "note": "Pair price (USD)" },
+      { "value": 2232.97, "observedAt": "2026-11-08T06:52:00Z", "source": "dexpaprika", "note": "1 WETH = 2,232.97 USDC (stale relative to the others)" },
+      { "value": 2133.0, "observedAt": "2026-11-08T22:45:00Z", "source": "tradingstrategy", "note": "Shown as 2.133K, rounded; the page gives only a relative time, so this is the retrieval time" }
+    ],
+    "tvlUsd": [
+      { "value": 79740721.22, "observedAt": "2026-11-08T22:46:24Z", "source": "etherscan", "note": "Sum of the pool's token holdings valued at Etherscan prices (WETH $30,893,428.55 + USDC $48,847,292.67)" },
+      { "value": 81499111.63, "observedAt": "2026-11-08T22:44:47Z", "source": "dextools" },
+      { "value": 80830000, "observedAt": "2026-11-08T06:52:00Z", "source": "dexpaprika", "note": "Shown as $80.83M" },
+      { "value": 117460000, "observedAt": "2026-11-08T22:45:00Z", "source": "tradingstrategy", "note": "Shown as $117.46M; methodology differs" }
+    ],
+    "reserves": [
+      { "weth": 14556.85380351, "usdc": 48867963.822744, "observedAt": "2026-11-08T22:46:24Z", "source": "etherscan", "note": "ERC-20 balances held by the pool contract. Includes liquidity outside the active range and uncollected fees." }
+    ],
+    "volume24hUsd": [
+      { "value": 75592829.35, "observedAt": "2026-11-08T22:44:47Z", "source": "dextools", "note": "24h volume during an approximately 5% intraday ETH sell-off" },
+      { "value": 12510000, "observedAt": "2026-11-08T06:52:00Z", "source": "dexpaprika", "note": "Shown as $12.51M; 2,623 transactions" },
+      { "value": 13240000, "observedAt": "2026-11-08T22:45:00Z", "source": "tradingstrategy", "note": "Shown as $13.24M" }
+    ],
+    "depth": [
+      {
+        "source": "bitquery",
+        "observedAt": "2026-05-03T04:43:23Z",
+        "block": 25012145,
+        "spotWethPerUsdc": 0.000434,
+        "direction": "USDC in → WETH out",
+        "note": "Maximum USDC input for which the average execution price stays within the slippage tolerance. The data is from six months before this snapshot.",
+        "rows": [
+          { "slippage": 0.001, "maxQuoteIn": 103250, "minBaseOut": 44.65 },
+          { "slippage": 0.005, "maxQuoteIn": 491600, "minBaseOut": 211.57 },
+          { "slippage": 0.01, "maxQuoteIn": 972070, "minBaseOut": 415.64 },
+          { "slippage": 0.02, "maxQuoteIn": 1960000, "minBaseOut": 815.38 },
+          { "slippage": 0.05, "maxQuoteIn": 4900000, "minBaseOut": 1970 },
+          { "slippage": 0.1, "maxQuoteIn": 9240000, "minBaseOut": 3460 }
+        ]
+      }
+    ],
+    "referenceApy": [
+      { "value": 0.1785, "tvlUsd": 95510000, "observedAt": null, "source": "defillama", "note": "Pool-average supply APY taken from a search-index copy of the page; the capture date is unknown. Context only; the engine does not use it." }
+    ]
+  },
+  "priceHistory": {
+    "source": "coincheckup",
+    "interval": "1d",
+    "series": "ETH/USD market-wide daily OHLC, standing in for the pool's WETH/USDC price",
+    "candles": [
+      { "t": "2026-10-07", "o": 2697.49, "h": 2698.51, "l": 2544.92, "c": 2573.29 },
+      { "t": "2026-10-08", "o": 2573.70, "h": 2583.96, "l": 2411.79, "c": 2472.43 },
+      { "t": "2026-10-09", "o": 2472.35, "h": 2508.14, "l": 2470.25, "c": 2486.32 },
+      { "t": "2026-10-10", "o": 2485.88, "h": 2514.61, "l": 2484.87, "c": 2504.77 },
+      { "t": "2026-10-11", "o": 2504.27, "h": 2549.74, "l": 2496.45, "c": 2534.82 },
+      { "t": "2026-10-12", "o": 2534.21, "h": 2574.20, "l": 2444.60, "c": 2444.60 },
+      { "t": "2026-10-13", "o": 2444.69, "h": 2533.11, "l": 2419.09, "c": 2496.38 },
+      { "t": "2026-10-14", "o": 2495.88, "h": 2522.20, "l": 2406.74, "c": 2416.01 },
+      { "t": "2026-10-15", "o": 2418.67, "h": 2462.44, "l": 2325.92, "c": 2440.47 },
+      { "t": "2026-10-16", "o": 2440.28, "h": 2485.31, "l": 2394.45, "c": 2420.06 },
+      { "t": "2026-10-17", "o": 2420.08, "h": 2437.08, "l": 2367.18, "c": 2398.72 },
+      { "t": "2026-10-18", "o": 2400.03, "h": 2424.76, "l": 2332.96, "c": 2406.26 },
+      { "t": "2026-10-19", "o": 2407.79, "h": 2442.98, "l": 2387.65, "c": 2404.98 },
+      { "t": "2026-10-20", "o": 2405.31, "h": 2470.28, "l": 2375.31, "c": 2447.77 },
+      { "t": "2026-10-21", "o": 2446.80, "h": 2517.68, "l": 2435.90, "c": 2470.90 },
+      { "t": "2026-10-22", "o": 2471.33, "h": 2478.87, "l": 2366.46, "c": 2385.29 },
+      { "t": "2026-10-23", "o": 2386.83, "h": 2412.99, "l": 2359.11, "c": 2384.45 },
+      { "t": "2026-10-24", "o": 2384.52, "h": 2385.50, "l": 2287.40, "c": 2356.65 },
+      { "t": "2026-10-25", "o": 2356.42, "h": 2367.57, "l": 2314.41, "c": 2323.62 },
+      { "t": "2026-10-26", "o": 2326.74, "h": 2336.58, "l": 2294.47, "c": 2318.85 },
+      { "t": "2026-10-27", "o": 2320.72, "h": 2356.18, "l": 2296.00, "c": 2349.32 },
+      { "t": "2026-10-28", "o": 2347.96, "h": 2377.99, "l": 2325.65, "c": 2356.04 },
+      { "t": "2026-10-29", "o": 2356.87, "h": 2371.46, "l": 2252.38, "c": 2252.38 },
+      { "t": "2026-10-30", "o": 2248.47, "h": 2255.28, "l": 2183.08, "c": 2242.05 },
+      { "t": "2026-10-31", "o": 2242.30, "h": 2262.62, "l": 2235.07, "c": 2252.73 },
+      { "t": "2026-11-01", "o": 2253.52, "h": 2273.63, "l": 2251.17, "c": 2272.43 },
+      { "t": "2026-11-02", "o": 2272.91, "h": 2308.34, "l": 2236.25, "c": 2249.99 },
+      { "t": "2026-11-03", "o": 2249.90, "h": 2299.65, "l": 2240.07, "c": 2280.83 },
+      { "t": "2026-11-04", "o": 2273.11, "h": 2440.17, "l": 2228.75, "c": 2424.60 },
+      { "t": "2026-11-05", "o": 2422.49, "h": 2432.83, "l": 2212.23, "c": 2231.58 },
+      { "t": "2026-11-06", "o": 2235.79, "h": 2246.19, "l": 2213.33, "c": 2237.23 }
+    ]
+  }
+}

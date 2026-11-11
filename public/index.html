@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uniswap v3 LP Dashboard — WETH/USDC</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="simple.css">
+</head>
+<body>
+<div class="app">
+  <div class="strip">
+    <div class="brand"><b>UNISWAP V3 LP DASHBOARD</b><span>WETH/USDC 0.05% pool · Ethereum</span></div>
+    <div id="stripStats" style="display:flex"></div>
+    <div class="right">
+      <span class="mono mut" id="asOf" style="font-size:10.5px"></span>
+      <button id="saveBtn" title="Save these inputs + this data snapshot">Save</button>
+      <button id="verifyBtn" title="Recompute the saved analysis from its snapshot and compare result hashes">Verify</button>
+      <span class="mono" id="repro" style="font-size:10.5px"></span>
+      <button id="themeBtn" title="Light / dark">◐</button>
+    </div>
+  </div>
+
+  <div class="main simple">
+    <!-- LEFT: four inputs -->
+    <div class="col">
+      <div class="sec">
+        <h3>Position</h3>
+        <form id="form" autocomplete="off">
+          <label class="f"><span>Deposit <small>USD</small></span><input id="capitalUsd" type="number" step="any" value="10000"></label>
+          <label class="f"><span>Lower</span><input id="rangeLower" type="number" step="any"></label>
+          <label class="f"><span>Upper</span><input id="rangeUpper" type="number" step="any"></label>
+          <div class="chips" id="widthChips"></div>
+          <label class="f"><span>Days</span><input id="horizonDays" type="number" value="30"></label>
+        </form>
+        <div id="formStatus" class="status"></div>
+      </div>
+    </div>
+
+    <!-- CENTER: chart + simple table -->
+    <div class="center">
+      <div class="chartwrap">
+        <div class="legend">
+          <span><i style="background:var(--text)"></i>Price <i class="prov observed"></i></span>
+          <span><i class="box" style="background:var(--band);outline:1px solid var(--band-edge)"></i>Range</span>
+          <span><i style="background:var(--series-7)"></i>Forecast 90% <i class="prov estimated"></i></span>
+          <span><i class="box" style="background:var(--bar)"></i>Liquidity <i class="prov derived"></i></span>
+        </div>
+        <div class="chart" id="priceChart"></div>
+      </div>
+      <div class="cmp">
+        <div class="cap"><span class="seg mini-seg" id="cmpSeg"><button type="button" data-v="widths" class="on">Widths</button><button type="button" data-v="tiers">Fee tiers</button></span> <i class="prov estimated"></i> <span id="cmpNote"></span></div>
+        <table id="cmpTable"></table>
+        <table id="tierTable" hidden></table>
+        <div class="tierwarn" id="tierWarn" hidden></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: the answer -->
+    <div class="col">
+      <div class="sec answer">
+        <h3>Result</h3>
+        <div class="q"><div class="ql">Fees <i class="prov estimated"></i></div><div class="qv n" id="aFees"></div><div class="qs" id="aFeesS"></div></div>
+        <div class="q"><div class="ql">Time in range <i class="prov estimated"></i></div><div class="qv n" id="aTime"></div><div class="qs" id="aTimeS"></div></div>
+        <div class="q"><div class="ql">Loss at edge vs hold <i class="prov derived"></i></div><div class="qv n neg" id="aEdge"></div><div class="qs" id="aEdgeS"></div></div>
+        <div class="q bottom"><div class="ql">Net vs hold <i class="prov estimated"></i></div><div class="qv n" id="aNet"></div><div class="qs" id="aNetS"></div></div>
+        <div class="q"><div class="ql">Break-even volume <i class="prov estimated"></i></div><div class="qv n" id="aBe"></div><div class="qs" id="aBeS"></div></div>
+      </div>
+      <div class="sec">
+        <h3><span>Deposit <i class="prov derived"></i></span></h3>
+        <dl class="kv" id="deposit"></dl>
+      </div>
+      <div class="sec">
+        <h3><span>Scenarios <i class="prov estimated"></i></span><span class="h-r mut" id="scnSub"></span></h3>
+        <table id="scn"></table>
+      </div>
+      <div class="sec foot" id="foot"></div>
+    </div>
+  </div>
+</div>
+<script src="charts.js"></script>
+<script src="simple.js"></script>
+</body>
+</html>

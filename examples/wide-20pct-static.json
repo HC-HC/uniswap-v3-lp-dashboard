@@ -1,0 +1,1 @@
+{ "snapshotId": "snap_2db514b79e879b0d", "label": "Example · $10k ±20% · static liquidity map", "inputs": { "capitalUsd": 10000, "rangeWidthPct": 20, "liquidityMode": "static" } }

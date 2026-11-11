@@ -1,0 +1,1 @@
+v1 snapshot (2026-11-08) transcribed from public pages. It has no tick data, so engine v2 cannot use it. It is kept for the record: its active-liquidity estimate (~2.0e6) was about 5× below the on-chain value (1.06e7) read on 2026-11-11.
